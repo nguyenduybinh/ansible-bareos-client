@@ -1,0 +1,21 @@
+---
+# add bareos repo
+- name: add bareos repo
+  apt_repository: repo="deb http://download.bareos.org/bareos/release/{{ bareos_version }}/{{ distro }}/ /" state=present update_cache=yes
+# add bareos key
+- name: add bareos key
+  apt_key: url="http://download.bareos.org/bareos/release/{{ bareos_version }}/{{ distro }}/Release.key" state=present
+# install file-daemon on client
+- name: install packages
+  apt: name=bareos-client state=present update_cache=yes
+# config file for file daemon join with director
+- name: config file daemon
+  template: src=bareos-fd.conf.j2 dest=/etc/bareos/bareos-fd.conf owner=root group=bareos mode=0640
+  notify: restart bareos-fd
+- name: config tray monitor
+  template: src=tray-monitor.conf.j2 dest=/etc/bareos/tray-monitor.conf owner=root group=bareos mode=0640
+# start and enable file daemon service
+- name: start and enable service
+  service: name=bareos-fd state=started enabled=yes
+
+

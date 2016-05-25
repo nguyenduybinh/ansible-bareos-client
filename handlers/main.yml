@@ -1,0 +1,4 @@
+---
+# handlers file for bareos
+- name: restart bareos-fd
+  service: name=bareos-fd state=restarted

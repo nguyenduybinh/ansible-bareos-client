@@ -1,0 +1,10 @@
+---
+# defaults file for bareos
+bareos_version: latest
+distro: xUbuntu_14.04
+client_passwd: nguyenduybinh
+client_mon_passwd: nguyenduybinh
+director_mon_passwd: nguyenduybinh
+storage_mon_passwd: nguyenduybinh
+director_hostname: master
+maximum_concurrent_job: 20

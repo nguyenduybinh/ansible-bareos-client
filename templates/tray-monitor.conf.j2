@@ -1,0 +1,30 @@
+#
+# Bareos Tray Monitor Configuration File
+#
+
+Monitor {
+  Name = {{ ansible_hostname }}-mon
+  Password = "{{ director_mon_passwd }}"         # password for the Directors
+  RefreshInterval = 30 seconds
+}
+
+Client {
+  Name = {{ ansible_hostname }}-fd
+  Address = {{ ansible_hostname }}
+  FDPort = 9102
+  Password = "{{ client_mon_passwd }}"          # password for FileDaemon
+}
+
+Storage {
+  Name = {{ ansible_hostname }}-sd
+  Address = {{ ansible_hostname }}
+  SDPort = 9103
+  Password = "{{ storage_mon_passwd }}"          # password for StorageDaemon
+}
+
+Director {
+  Name = {{ ansible_hostname }}-dir
+  DIRport = 9101
+  address = {{ ansible_hostname }}
+}
+
