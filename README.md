@@ -1,38 +1,44 @@
-Role Name
-=========
+# Role Name
 
-A brief description of the role goes here.
-
-Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+ansible-bareos-client
 
-Role Variables
+# Description
+-------------
+Sử dụng role cho việc cài đặt và cấu hình file daemon trên các client node để thực hiện back up dữ liệu từ client về storage backend với sự quản lý tập trung của director 
+
+Role thực hiện cài đặt và cầu hình:
+* bareos-fd: file daemon để thực hiện backup dữ liệu trên client node
+* Cấu hình client node join vào quản lý của 1 director
+
+# Role Variables
+
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Toàn bộ biến chương trình được lưu trong  defaults/main.yml
 
-Dependencies
+Có thể tùy biến các biến trong file này để phù hợp với các trường hợp cài đặt khác nhau
+
+# Dependencies
+
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* Role viết cho cài đặt bareos trên Ubuntu 14.04
+* Các cấu hình và cài đặt chạy với quyền root 
 
-Example Playbook
+# Example Playbook
+
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Phụ thuộc vào việc khai vào inventory trrong ansible:
 
-    - hosts: servers
+Ví dụ test với VM Vagrant, host khai báo trong /etc/ansible/hosts, group [clients]:
+
+    - hosts: clients
+      remote_users: vagrant
+      sudo: yes
       roles:
-         - { role: username.rolename, x: 42 }
+         - ansible-bareos-client
 
-License
--------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
